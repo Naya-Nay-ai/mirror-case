@@ -1,33 +1,95 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#121216" />
-  <title>MIRROR CASE</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111919">
+  <meta name="description" content="AIパートナーと、対話を重ねて謎を解く。協力型推理ゲーム MIRROR CASE の入口。現在はトップ画面の試作版です。">
+  <title>MIRROR CASE — ふたりの視点で、謎を解く。</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23111919'/%3E%3Cpath d='M17 49V26a15 15 0 0 1 30 0v23zm6-6V26a9 9 0 0 1 18 0v17' fill='none' stroke='%23c3aa7a' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
 </head>
 <body>
-  <div class="app-shell">
+  <a class="skip-link" href="#entrance-menu">入口メニューへ</a>
+  <div class="site-shell">
     <header class="site-header">
-      <div class="brand">MIRROR CASE</div>
-      <span class="status-pill">仮設版</span>
+      <span class="header-mark" aria-hidden="true"><svg viewBox="0 0 32 40" fill="none"><path d="M3 37V16a13 13 0 0 1 26 0v21H3Z M9 31V16a7 7 0 0 1 14 0v15H9Z"/><path d="M16 9v22"/></svg></span>
+      <p>AIパートナーと遊ぶ協力型推理ゲーム</p>
+      <span class="edition">入口・試作版</span>
     </header>
-    <main class="home" aria-labelledby="page-title">
-      <section class="hero">
-        <p class="eyebrow">AIパートナーと遊ぶ推理ゲーム</p>
-        <h1 id="page-title">事件の中身は、まだ空っぽ。</h1>
-        <p class="lead">いまはゲーム内容を入れる前の「家」だけ。ここから事件、カード、セーブ、対戦を育てていく。</p>
+    <main class="entrance" aria-labelledby="page-title">
+      <section class="intro">
+        <p class="intro-line"><span aria-hidden="true"></span>ふたりの視点で、謎を解く。</p>
+        <h1 id="page-title" aria-label="MIRROR CASE"><span>MIRROR</span><span class="title-second">CASE<span class="title-stop" aria-hidden="true">.</span></span></h1>
+        <p class="lead">気づいたことを、話そう。<br>AIパートナーと、ひとつの事件に向き合う。</p>
+        <nav class="entrance-menu" id="entrance-menu" aria-label="入口メニュー" tabindex="-1">
+          <button class="start-button" type="button" data-action="new-case" aria-haspopup="dialog">
+            <svg class="door-icon" viewBox="0 0 24 28" fill="none" aria-hidden="true"><path d="M3 25V10a9 9 0 0 1 18 0v15H3Z M8 25V10a4 4 0 0 1 8 0v15"/><path d="M12 15h1"/></svg>
+            <span>事件をはじめる</span><span class="arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="resume-button" type="button" data-action="resume" aria-haspopup="dialog" aria-describedby="resume-note"><span>つづきから</span><span id="resume-note">保存された事件はありません</span></button>
+          <div class="secondary-menu">
+            <button type="button" data-action="archive" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 3h12v18H5z M8 7h6 M8 11h6 M8 15h4 M17 6h3v15h-3"/></svg><span>事件記録</span><span class="small-arrow" aria-hidden="true">↗</span></button>
+            <button type="button" data-action="settings" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7h18 M3 17h18 M8 4v6 M16 14v6"/></svg><span>設定</span><span class="small-arrow" aria-hidden="true">↗</span></button>
+          </div>
+        </nav>
+        <noscript><p class="notice">入口メニューを開くには、JavaScriptを有効にしてください。</p></noscript>
       </section>
-      <section class="entry-grid" aria-label="ゲーム入口">
-        <button class="entry-card primary" type="button" data-placeholder="new-case"><span class="entry-title">事件をはじめる</span><span class="entry-note">まだ未実装</span></button>
-        <button class="entry-card" type="button" data-placeholder="resume"><span class="entry-title">つづきから</span><span class="entry-note" id="resume-note">セーブデータなし</span></button>
-        <button class="entry-card" type="button" data-placeholder="archive"><span class="entry-title">事件記録</span><span class="entry-note">まだ未実装</span></button>
-        <button class="entry-card" type="button" data-placeholder="settings"><span class="entry-title">設定</span><span class="entry-note">まだ未実装</span></button>
-      </section>
-      <p class="dev-note" id="dev-note" aria-live="polite">家だけ完成。ゲーム内容はこれから。</p>
+      <!-- Decorative artwork only. No scene, clue, or game rule is implied. -->
+      <div class="mirror-scene" aria-hidden="true">
+        <svg class="mirror-art" viewBox="0 0 580 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="glass" x1="149" y1="95" x2="463" y2="639" gradientUnits="userSpaceOnUse"><stop stop-color="#334341"/><stop offset=".43" stop-color="#202e2d"/><stop offset="1" stop-color="#111c1d"/></linearGradient>
+            <linearGradient id="edge" x1="133" y1="104" x2="447" y2="640" gradientUnits="userSpaceOnUse"><stop stop-color="#70684e"/><stop offset=".28" stop-color="#d6c398"/><stop offset=".6" stop-color="#6d634c"/><stop offset="1" stop-color="#a48b61"/></linearGradient>
+            <linearGradient id="light" x1="224" y1="213" x2="345" y2="590" gradientUnits="userSpaceOnUse"><stop stop-color="#c9cfc0" stop-opacity=".13"/><stop offset="1" stop-color="#c9cfc0" stop-opacity="0"/></linearGradient>
+            <linearGradient id="floor" x1="299" y1="627" x2="299" y2="708" gradientUnits="userSpaceOnUse"><stop stop-color="#b9a178" stop-opacity=".18"/><stop offset="1" stop-color="#b9a178" stop-opacity="0"/></linearGradient>
+            <radialGradient id="halo"><stop stop-color="#64736a" stop-opacity=".17"/><stop offset="1" stop-color="#64736a" stop-opacity="0"/></radialGradient>
+            <clipPath id="mirror-clip"><path d="M153 618V248a145 145 0 0 1 290 0v370Z"/></clipPath>
+          </defs>
+          <ellipse cx="298" cy="356" rx="280" ry="340" fill="url(#halo)"/>
+          <path d="M105 601V225a159 159 0 0 1 318 0v376Z" stroke="#6b7469" stroke-opacity=".25"/>
+          <path d="M97 610h326" stroke="#6b7469" stroke-opacity=".15"/>
+          <path d="M135 634V248a163 163 0 0 1 326 0v386Z" fill="#111b1b" stroke="url(#edge)" stroke-width="2"/>
+          <path d="M142 626V248a156 156 0 0 1 312 0v378Z" stroke="#8a7c5f" stroke-opacity=".65"/>
+          <path d="M153 618V248a145 145 0 0 1 290 0v370Z" fill="url(#glass)" stroke="#ae9873" stroke-opacity=".5"/>
+          <g clip-path="url(#mirror-clip)">
+            <path d="M184 618V295a114 114 0 0 1 228 0v323Z" stroke="#839389" stroke-opacity=".2"/>
+            <path d="M191 618V295a107 107 0 0 1 214 0v323Z" stroke="#839389" stroke-opacity=".12"/>
+            <path d="M231 618V316a67 67 0 0 1 134 0v302Z" fill="#142222" stroke="#889589" stroke-opacity=".26"/>
+            <path d="M240 618V316a58 58 0 0 1 116 0v302Z" stroke="#889589" stroke-opacity=".16"/>
+            <path d="M298 259v359 M240 347h116" stroke="#889589" stroke-opacity=".21"/>
+            <path d="M153 502 443 257v150L214 618h-61Z" fill="url(#light)"/>
+            <path d="m153 529 290-245" stroke="#c4cec1" stroke-opacity=".09"/>
+            <circle cx="324" cy="304" r="15" fill="#d6d8c5"/><circle cx="332" cy="298" r="15" fill="#142222"/>
+            <path d="M242 491c26-13 39-14 56-9 23-26 42-24 61-18v154H242Z" fill="#101c1d"/>
+            <path d="m203 618 68-101 M393 618l-61-101 M154 579h289 M154 600h289" stroke="#a3ad9b" stroke-opacity=".08"/>
+          </g>
+          <path d="M131 640h334 M122 646h352" stroke="#a58b61" stroke-opacity=".55"/>
+          <path d="m135 653-53 62h431l-52-62" fill="url(#floor)"/>
+          <path d="M30 667h518 M87 693h425" stroke="#bca57e" stroke-opacity=".09"/>
+          <path d="M292 126v13 M305 126v13" stroke="#c9b78d" stroke-opacity=".6"/>
+          <circle cx="492" cy="307" r="2" fill="#a68f68"/><path d="M492 320v180" stroke="#a68f68" stroke-opacity=".22"/>
+        </svg>
+      </div>
     </main>
+    <footer class="site-footer">
+      <p><span class="footer-dot" aria-hidden="true"></span>入口の試作版です。ゲーム本編は準備中。</p>
+      <span class="signature">NAYA &amp; NAY</span>
+    </footer>
   </div>
-  <script type="module" src="./app.js"></script>
+  <dialog id="entry-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <div class="dialog-topline"><span class="dialog-brand">MIRROR CASE</span><button class="close-button" type="button" data-close aria-label="閉じる">×</button></div>
+    <h2 id="dialog-title"></h2><p id="dialog-description"></p>
+    <fieldset class="text-settings" id="text-settings" hidden>
+      <legend>文字の大きさ</legend>
+      <div class="size-options">
+        <label><input type="radio" name="text-size" value="standard" checked><span>標準</span></label>
+        <label><input type="radio" name="text-size" value="large"><span>大きめ</span></label>
+      </div>
+      <p class="settings-note" id="settings-note" aria-live="polite">このブラウザに保存します。</p>
+    </fieldset>
+    <button class="dialog-return" type="button" data-close>入口に戻る<span aria-hidden="true">↗</span></button>
+  </dialog>
 </body>
 </html>

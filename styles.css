@@ -1,122 +1,123 @@
+/* 1. Design tokens — edit these to change the entrance's appearance. */
 :root {
   color-scheme: dark;
-  --bg: #0f1014;
-  --surface: rgba(255, 255, 255, 0.055);
-  --surface-strong: rgba(255, 255, 255, 0.09);
-  --line: rgba(255, 255, 255, 0.12);
-  --text: #f4f1e8;
-  --muted: #aaa8a2;
-  --accent: #b8e0d2;
-  --accent-soft: rgba(184, 224, 210, 0.14);
-  --shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
-  font-family: "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
+  --bg: #111919;
+  --paper: #e8e3d6;
+  --muted: #acb1a5;
+  --brass: #c0a779;
+  --line: #36403b;
+  --serif: "Bodoni MT", Didot, "Times New Roman", "Yu Mincho", serif;
+  --sans: "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  font-family: var(--sans);
+  font-synthesis: none;
+  font-size: 16px;
 }
+:root[data-text-size="large"] { font-size: 19px; }
 * { box-sizing: border-box; }
-html, body { min-height: 100%; }
-body {
-  margin: 0;
-  min-width: 320px;
-  background:
-    radial-gradient(circle at 20% 10%, rgba(184, 224, 210, 0.08), transparent 36rem),
-    linear-gradient(160deg, #15161b 0%, #0d0e12 72%);
-  color: var(--text);
+body { margin: 0; min-width: 280px; background: var(--bg); color: var(--paper); }
+button, input { font: inherit; }
+button { color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+button, a, input { touch-action: manipulation; }
+button { border-radius: 0; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--brass); outline-offset: 6px; }
+button:hover { color: #fffbed; }
+svg { display: block; }
+[hidden] { display: none !important; }
+::selection { background: #a58c60; color: #111919; }
+.skip-link { position: fixed; top: -100px; left: 20px; z-index: 5; padding: 14px 20px; background: var(--paper); color: var(--bg); }
+.skip-link:focus { top: 15px; }
+/* 2. A single, quiet title screen. The artwork never intercepts input. */
+.site-shell { max-width: 1600px; min-height: 100svh; margin: 0 auto; padding: 0 clamp(24px, 5.7vw, 88px); display: flex; flex-direction: column; }
+.site-header { min-height: 105px; display: flex; align-items: center; gap: 19px; border-bottom: 1px solid var(--line); }
+.header-mark { flex: 0 0 25px; color: var(--brass); }
+.header-mark svg { width: 25px; height: 34px; stroke: currentColor; stroke-width: 1.2; }
+.site-header p { margin: 0; color: var(--muted); font-size: .72rem; letter-spacing: .09em; line-height: 1.9; }
+.edition { margin-left: auto; padding-left: 16px; white-space: nowrap; color: var(--muted); font-size: .68rem; letter-spacing: .1em; }
+.entrance { position: relative; flex: 1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 22px; width: 100%; padding: 42px 0 46px; }
+.intro { position: relative; z-index: 1; min-width: 0; padding-left: clamp(0px, 2.1vw, 32px); }
+.intro-line { display: flex; align-items: center; gap: 14px; margin: 0 0 27px; color: var(--brass); font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: .8rem; letter-spacing: .13em; }
+.intro-line > span { width: 26px; height: 1px; background: var(--brass); }
+h1 { margin: 0 0 31px -5px; font-family: var(--serif); font-weight: 400; font-size: clamp(5rem, 8.65vw, 8rem); line-height: .84; letter-spacing: -.045em; }
+h1 > span { display: block; }
+.title-second { margin-top: 12px; letter-spacing: .018em; }
+.title-stop { color: var(--brass); }
+.lead { margin: 0; font-size: .85rem; line-height: 2.15; letter-spacing: .06em; color: #bcc0b5; }
+.entrance-menu { width: min(100%, 390px); margin-top: 42px; }
+.entrance-menu:focus { outline: none; }
+.start-button { width: 100%; min-height: 66px; display: flex; align-items: center; gap: 16px; border: 1px solid var(--paper); padding: 15px 22px; background: var(--paper); color: #1c2724; font-size: .91rem; font-weight: 600; letter-spacing: .07em; transition: background 150ms ease, border-color 150ms ease; }
+.door-icon { width: 21px; height: 26px; flex-shrink: 0; stroke: currentColor; stroke-width: 1.3; }
+.arrow { margin-left: auto; font-family: Arial, sans-serif; font-size: 1.4rem; font-weight: 400; }
+.start-button:hover { background: #cdb992; border-color: #cdb992; color: #111919; }
+.resume-button { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 15px; width: 100%; min-height: 62px; padding: 18px 4px; background: transparent; border: 0; border-bottom: 1px solid var(--line); text-align: left; }
+.resume-button > span:first-child { font-size: .83rem; letter-spacing: .05em; }
+#resume-note { font-size: .65rem; color: var(--muted); }
+.secondary-menu { display: grid; grid-template-columns: 1.2fr 1fr; padding-top: 10px; }
+.secondary-menu button { display: flex; align-items: center; gap: 11px; min-height: 47px; padding: 9px 4px; background: none; border: 0; font-size: .79rem; letter-spacing: .04em; }
+.secondary-menu button:last-child { margin-left: 22px; }
+.secondary-menu svg { width: 18px; height: 18px; flex-shrink: 0; stroke: var(--muted); stroke-width: 1.2; }
+.small-arrow { padding-left: 8px; color: var(--muted); font-family: Arial, sans-serif; font-size: .85rem; }
+.mirror-scene { position: relative; min-width: 0; pointer-events: none; align-self: center; }
+.mirror-art { width: 100%; max-height: 690px; }
+.site-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; min-height: 72px; padding: 18px 0; border-top: 1px solid var(--line); }
+.site-footer p { display: flex; align-items: center; gap: 10px; margin: 0; color: var(--muted); font-size: .65rem; line-height: 1.8; letter-spacing: .035em; }
+.footer-dot { width: 4px; height: 4px; flex-shrink: 0; background: var(--brass); transform: rotate(45deg); }
+.signature { font-family: var(--serif); font-size: .75rem; letter-spacing: .1em; color: #a3ab9e; }
+.notice { color: var(--muted); font-size: .8rem; line-height: 1.8; }
+/* 3. Placeholder destinations; replace app.js handlers when the game is ready. */
+dialog { width: min(460px, calc(100% - 36px)); max-height: calc(100svh - 48px); padding: 24px 30px 30px; border: 1px solid #70664f; background: #182220; color: var(--paper); box-shadow: 0 24px 100px #0006; }
+dialog::backdrop { background: #070d0de0; }
+.dialog-topline { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
+.dialog-brand { color: var(--brass); font-family: var(--serif); font-size: .83rem; letter-spacing: .08em; }
+.close-button { display: grid; place-items: center; width: 44px; height: 44px; margin-right: -12px; border: 0; background: none; color: var(--muted); font-size: 1.8rem; font-weight: 400; }
+dialog h2 { margin: 0 0 16px; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 1.4rem; font-weight: 500; line-height: 1.6; }
+#dialog-description { margin: 0; color: #bfc4b7; font-size: .85rem; line-height: 2; white-space: pre-line; overflow-wrap: anywhere; }
+.dialog-return { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; min-height: 50px; margin-top: 30px; padding: 14px 0 4px; border: 0; border-top: 1px solid #4d554b; background: none; font-size: .83rem; text-align: left; }
+.text-settings { margin: 28px 0 0; padding: 0; border: 0; }
+.text-settings legend { margin-bottom: 12px; font-size: .85rem; }
+.size-options { display: flex; gap: 12px; }
+.size-options label { display: flex; align-items: center; gap: 9px; flex: 1; min-height: 48px; padding: 12px; border: 1px solid #586151; font-size: .85rem; cursor: pointer; }
+.size-options label:has(input:checked) { border-color: var(--brass); background: #c0a7790d; }
+.size-options input { width: 17px; height: 17px; margin: 0; accent-color: var(--brass); }
+.settings-note { color: var(--muted); font-size: .72rem; line-height: 1.8; }
+body:has(dialog[open]) { overflow: hidden; }
+/* 4. Compact title screen: the mirror becomes a backdrop. */
+@media (min-width: 1500px) { .entrance { gap: 60px; } }
+@media (max-width: 900px) and (min-width: 701px) {
+  .site-shell { padding-inline: 32px; }
+  .entrance { grid-template-columns: 1.1fr 1fr; gap: 0; }
+  .intro { padding-left: 0; }
+  h1 { font-size: clamp(3.5rem, 9.5vw, 5.3rem); }
+  .lead { font-size: .76rem; }
+  .mirror-scene { margin-right: -20px; }
 }
-button, input, select, textarea { font: inherit; }
-.app-shell {
-  width: min(100%, 1080px);
-  min-height: 100svh;
-  margin: 0 auto;
-  padding: 24px clamp(18px, 4vw, 48px) 44px;
+@media (max-width: 700px) {
+  .site-shell { padding-inline: 25px; }
+  .site-header { min-height: 78px; gap: 12px; }
+  .header-mark { flex-basis: 19px; }
+  .header-mark svg { width: 19px; height: 29px; }
+  .site-header p { max-width: 175px; font-size: .63rem; letter-spacing: .02em; }
+  .edition { padding-left: 0; font-size: .58rem; letter-spacing: .02em; }
+  .entrance { display: block; padding: 48px 0 29px; }
+  .intro { padding: 0; }
+  .intro-line { margin-bottom: 25px; font-size: .7rem; gap: 10px; letter-spacing: .08em; }
+  .intro-line > span { width: 18px; }
+  h1 { width: fit-content; margin-left: -3px; margin-bottom: 27px; font-size: clamp(3rem, 16.8vw, 7.2rem); }
+  .title-second { margin-top: 11px; }
+  .lead { font-size: .82rem; line-height: 2.1; letter-spacing: .025em; }
+  .entrance-menu { width: 100%; margin-top: 31px; }
+  .mirror-scene { position: absolute; z-index: 0; width: 260px; top: 4px; right: -25px; opacity: .57; -webkit-mask-image: linear-gradient(to right, transparent, #000 58%); mask-image: linear-gradient(to right, transparent, #000 58%); }
+  .mirror-scene::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--bg), transparent 48%); }
+  .start-button { min-height: 62px; font-size: .87rem; }
+  .site-footer { min-height: 82px; gap: 6px 12px; }
+  .site-footer p { font-size: .6rem; }
+  .signature { font-size: .66rem; margin-left: auto; }
+  dialog { padding: 20px 24px 25px; }
 }
-.site-header {
-  min-height: 54px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  border-bottom: 1px solid var(--line);
+@media (max-width: 359px) {
+  .site-shell { padding-inline: 20px; }
+  .site-header p { max-width: 135px; }
+  .edition { font-size: .55rem; }
+  .lead { font-size: .7rem; }
+  #resume-note { font-size: .58rem; }
 }
-.brand {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
-  letter-spacing: 0.09em;
-}
-.status-pill {
-  padding: 6px 10px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--muted);
-  font-size: 0.75rem;
-}
-.home {
-  display: grid;
-  gap: 34px;
-  padding-top: clamp(58px, 10vw, 110px);
-}
-.hero { max-width: 720px; }
-.eyebrow {
-  margin: 0 0 14px;
-  color: var(--accent);
-  font-size: 0.84rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-h1 {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 6vw, 4.25rem);
-  font-weight: 500;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-}
-.lead {
-  max-width: 620px;
-  margin: 22px 0 0;
-  color: var(--muted);
-  font-size: clamp(0.98rem, 2vw, 1.08rem);
-  line-height: 1.9;
-}
-.entry-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-.entry-card {
-  min-height: 118px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--surface);
-  color: var(--text);
-  text-align: left;
-  cursor: pointer;
-  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
-}
-.entry-card:hover,
-.entry-card:focus-visible {
-  transform: translateY(-2px);
-  border-color: rgba(184, 224, 210, 0.38);
-  background: var(--surface-strong);
-  outline: none;
-}
-.entry-card.primary {
-  background: var(--accent-soft);
-  border-color: rgba(184, 224, 210, 0.28);
-}
-.entry-title { font-size: 1.06rem; font-weight: 700; }
-.entry-note { color: var(--muted); font-size: 0.82rem; }
-.dev-note { min-height: 1.5em; margin: 0; color: var(--muted); font-size: 0.84rem; }
-@media (max-width: 640px) {
-  .app-shell { padding-top: 16px; }
-  .home { padding-top: 46px; }
-  .entry-grid { grid-template-columns: 1fr; }
-  .entry-card { min-height: 100px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
-}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }
