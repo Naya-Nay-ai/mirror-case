@@ -27,7 +27,7 @@ svg { display: block; }
 .skip-link { position: fixed; top: -100px; left: 20px; z-index: 5; padding: 14px 20px; background: var(--paper); color: var(--bg); }
 .skip-link:focus { top: 15px; }
 /* 2. A single, quiet title screen. The artwork never intercepts input. */
-.site-shell { max-width: 1600px; min-height: 100svh; margin: 0 auto; padding: 0 clamp(24px, 5.7vw, 88px); display: flex; flex-direction: column; }
+.site-shell { position: relative; isolation: isolate; max-width: 1600px; min-height: 100svh; margin: 0 auto; padding: 0 clamp(24px, 5.7vw, 88px); display: flex; flex-direction: column; }
 .site-header { min-height: 105px; display: flex; align-items: center; gap: 19px; border-bottom: 1px solid var(--line); }
 .header-mark { flex: 0 0 25px; color: var(--brass); }
 .header-mark svg { width: 25px; height: 34px; stroke: currentColor; stroke-width: 1.2; }
@@ -56,8 +56,14 @@ h1 > span { display: block; }
 .secondary-menu button:last-child { margin-left: 22px; }
 .secondary-menu svg { width: 18px; height: 18px; flex-shrink: 0; stroke: var(--muted); stroke-width: 1.2; }
 .small-arrow { padding-left: 8px; color: var(--muted); font-family: Arial, sans-serif; font-size: .85rem; }
-.mirror-scene { position: relative; min-width: 0; pointer-events: none; align-self: center; }
-.mirror-art { width: 100%; max-height: 690px; }
+.world-backdrop { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.world-backdrop img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+/* Only a readability veil: all light, reflections and materials come from the image. */
+.world-backdrop::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(17 25 25 / .35), transparent 60%); }
+.scene-space { width: 100%; aspect-ratio: 580 / 720; max-height: 690px; pointer-events: none; }
+.site-header, .site-footer { background: rgb(17 25 25 / .16); }
+.intro { text-shadow: 0 2px 12px rgb(0 0 0 / .4); }
+.start-button { text-shadow: none; }
 .site-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; min-height: 72px; padding: 18px 0; border-top: 1px solid var(--line); }
 .site-footer p { display: flex; align-items: center; gap: 10px; margin: 0; color: var(--muted); font-size: .65rem; line-height: 1.8; letter-spacing: .035em; }
 .footer-dot { width: 4px; height: 4px; flex-shrink: 0; background: var(--brass); transform: rotate(45deg); }
@@ -80,7 +86,7 @@ dialog h2 { margin: 0 0 16px; font-family: "Yu Mincho", "Hiragino Mincho ProN", 
 .size-options input { width: 17px; height: 17px; margin: 0; accent-color: var(--brass); }
 .settings-note { color: var(--muted); font-size: .72rem; line-height: 1.8; }
 body:has(dialog[open]) { overflow: hidden; }
-/* 4. Compact title screen: the mirror becomes a backdrop. */
+/* 4. Same room on mobile; the veil keeps the existing menu readable. */
 @media (min-width: 1500px) { .entrance { gap: 60px; } }
 @media (max-width: 900px) and (min-width: 701px) {
   .site-shell { padding-inline: 32px; }
@@ -88,7 +94,7 @@ body:has(dialog[open]) { overflow: hidden; }
   .intro { padding-left: 0; }
   h1 { font-size: clamp(3.5rem, 9.5vw, 5.3rem); }
   .lead { font-size: .76rem; }
-  .mirror-scene { margin-right: -20px; }
+  .world-backdrop img { object-position: 57% center; }
 }
 @media (max-width: 700px) {
   .site-shell { padding-inline: 25px; }
@@ -105,8 +111,9 @@ body:has(dialog[open]) { overflow: hidden; }
   .title-second { margin-top: 11px; }
   .lead { font-size: .82rem; line-height: 2.1; letter-spacing: .025em; }
   .entrance-menu { width: 100%; margin-top: 31px; }
-  .mirror-scene { position: absolute; z-index: 0; width: 260px; top: 4px; right: -25px; opacity: .57; -webkit-mask-image: linear-gradient(to right, transparent, #000 58%); mask-image: linear-gradient(to right, transparent, #000 58%); }
-  .mirror-scene::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--bg), transparent 48%); }
+  .scene-space { display: none; }
+  .world-backdrop img { object-position: 59% top; }
+  .world-backdrop::after { background: linear-gradient(90deg, rgb(10 20 18 / .82), rgb(10 20 18 / .52) 58%, rgb(10 20 18 / .22)), linear-gradient(0deg, rgb(17 25 25 / .88), transparent 60%); }
   .start-button { min-height: 62px; font-size: .87rem; }
   .site-footer { min-height: 82px; gap: 6px 12px; }
   .site-footer p { font-size: .6rem; }
