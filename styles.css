@@ -85,6 +85,31 @@ dialog h2 { margin: 0 0 16px; font-family: "Yu Mincho", "Hiragino Mincho ProN", 
 .size-options label:has(input:checked) { border-color: var(--brass); background: #c0a7790d; }
 .size-options input { width: 17px; height: 17px; margin: 0; accent-color: var(--brass); }
 .settings-note { color: var(--muted); font-size: .72rem; line-height: 1.8; }
+.pair-summary { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 12px 0 0; color: var(--muted); font-size: .7rem; line-height: 1.8; }
+.pair-summary > span { min-width: 0; overflow-wrap: anywhere; }
+.registry-dialog { width: min(500px, calc(100% - 36px)); border-top: 3px double var(--brass); }
+.registry-rule { margin: 22px 0; color: var(--brass); font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: .9rem; line-height: 1.9; }
+.registry-entry { padding: 0 0 4px 18px; border-left: 1px solid #70664f; }
+.registry-entry label { display: block; margin-top: 22px; font-size: .9rem; }
+.registry-entry label span { margin-left: 10px; color: var(--muted); font-size: .7rem; }
+.registry-entry input { display: block; width: 100%; min-height: 48px; padding: 10px 4px; border: 0; border-bottom: 1px solid #70664f; border-radius: 0; background: transparent; color: var(--paper); font-size: 1rem; }
+.registry-entry input::placeholder { color: #929a8f; opacity: 1; }
+.registry-entry input[aria-invalid="true"] { border-bottom-color: #e4b5a1; }
+.registry-message { margin: 22px 0 10px; color: #bfc4b7; font-size: .8rem; line-height: 1.9; }
+.registry-error { margin: 12px 0; color: #efc1ad; font-size: .8rem; line-height: 1.8; }
+.registry-error:empty { display: none; }
+.registry-submit { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 50px; padding: 13px 16px; border: 1px solid var(--brass); background: var(--paper); color: var(--bg); font-size: .85rem; line-height: 1.7; text-align: left; }
+.registry-submit:hover { background: #cdb992; color: var(--bg); }
+.registry-result { margin-top: 24px; }
+.registry-seal { width: fit-content; margin: 0 0 20px auto; padding: 5px 12px; border: 1px solid var(--brass); color: var(--brass); font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: .8rem; letter-spacing: .15em; }
+.registry-complete .registry-seal { animation: registration-ink 280ms ease-out; }
+@keyframes registration-ink { from { opacity: 0; } to { opacity: 1; } }
+.registry-names { margin: 0 0 26px; }
+.registry-names > div { display: grid; grid-template-columns: 3em minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid #4d554b; }
+.registry-names dt { color: var(--muted); font-size: .8rem; line-height: 1.9; }
+.registry-names dd { margin: 0; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; line-height: 1.7; overflow-wrap: anywhere; }
+.pair-settings { margin-top: 22px; }
+.pair-edit { display: flex; justify-content: space-between; align-items: center; gap: 14px; width: 100%; min-height: 48px; padding: 12px 0; border: 0; border-bottom: 1px solid #4d554b; background: transparent; font-size: .83rem; text-align: left; }
 body:has(dialog[open]) { overflow: hidden; }
 /* 4. Same room on mobile; the veil keeps the existing menu readable. */
 @media (min-width: 1500px) { .entrance { gap: 60px; } }
@@ -127,4 +152,4 @@ body:has(dialog[open]) { overflow: hidden; }
   .lead { font-size: .7rem; }
   #resume-note { font-size: .58rem; }
 }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
